@@ -1,0 +1,11 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" fill="#F4F0E7"/>
+  <rect x="134" y="82" width="932" height="736" rx="34" fill="#FFFDF9"/>
+  <rect x="184" y="146" width="362" height="598" rx="30" fill="#E2AC31"/>
+  <rect x="578" y="146" width="438" height="184" rx="30" fill="#151515"/>
+  <rect x="578" y="360" width="438" height="384" rx="30" fill="#F4EEE2" stroke="#DED4C2" stroke-width="2"/>
+  <text x="622" y="226" fill="#E2AC31" font-family="Arial, sans-serif" font-size="30" font-weight="700">Landscaping flyer</text>
+  <text x="622" y="268" fill="#FFFDF8" font-family="Arial, sans-serif" font-size="22">Seasonal service promo</text>
+  <text x="228" y="232" fill="#151515" font-family="Arial, sans-serif" font-size="30" font-weight="700">YARD REFRESH</text>
+  <text x="228" y="274" fill="#151515" font-family="Arial, sans-serif" font-size="20">Replace with finished project photography</text>
+</svg>

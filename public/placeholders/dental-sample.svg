@@ -1,0 +1,12 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" fill="#F6F3ED"/>
+  <rect x="128" y="84" width="944" height="732" rx="32" fill="#FFFDF9"/>
+  <rect x="188" y="150" width="824" height="210" rx="30" fill="#151515"/>
+  <rect x="188" y="392" width="398" height="350" rx="30" fill="#F3EEE4" stroke="#DED4C2" stroke-width="2"/>
+  <rect x="614" y="392" width="398" height="350" rx="30" fill="#E2AC31"/>
+  <text x="232" y="224" fill="#E2AC31" font-family="Arial, sans-serif" font-size="30" font-weight="700">Dental clinic flyer</text>
+  <text x="232" y="268" fill="#FFFDF8" font-family="Arial, sans-serif" font-size="22">New patient offer placeholder</text>
+  <text x="232" y="308" fill="#C4BFB6" font-family="Arial, sans-serif" font-size="20">Replace with your clinic branding</text>
+  <text x="230" y="474" fill="#151515" font-family="Arial, sans-serif" font-size="26">Service highlights</text>
+  <text x="658" y="474" fill="#151515" font-family="Arial, sans-serif" font-size="26" font-weight="700">Limited-time offer</text>
+</svg>

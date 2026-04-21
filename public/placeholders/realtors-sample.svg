@@ -1,0 +1,16 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" fill="#F4F1EA"/>
+  <rect x="116" y="76" width="968" height="748" rx="34" fill="#FFFDF9"/>
+  <rect x="176" y="138" width="332" height="600" rx="30" fill="#151515"/>
+  <rect x="550" y="138" width="474" height="230" rx="30" fill="#E2AC31"/>
+  <rect x="550" y="396" width="474" height="342" rx="30" fill="#F5EFE4" stroke="#DED4C2" stroke-width="2"/>
+  <text x="218" y="212" fill="#E2AC31" font-family="Arial, sans-serif" font-size="28" font-weight="700">Realtor flyer</text>
+  <text x="218" y="252" fill="#FFFDF8" font-family="Arial, sans-serif" font-size="22">Door hanger sample</text>
+  <text x="218" y="308" fill="#C4BFB6" font-family="Arial, sans-serif" font-size="20">Replace with listing photos</text>
+  <text x="592" y="230" fill="#151515" font-family="Arial, sans-serif" font-size="42" font-weight="700">JUST LISTED</text>
+  <text x="592" y="278" fill="#151515" font-family="Arial, sans-serif" font-size="22">Strong local real estate farming creative</text>
+  <text x="592" y="472" fill="#151515" font-family="Arial, sans-serif" font-size="26">Neighbourhood stats</text>
+  <rect x="592" y="510" width="224" height="18" rx="9" fill="#151515"/>
+  <rect x="592" y="542" width="300" height="18" rx="9" fill="#B0AA9E"/>
+  <rect x="592" y="574" width="268" height="18" rx="9" fill="#B0AA9E"/>
+</svg>

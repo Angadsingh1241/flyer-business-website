@@ -1,0 +1,11 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" fill="#F6F2EA"/>
+  <rect x="136" y="84" width="928" height="732" rx="34" fill="#FFFDF9"/>
+  <rect x="186" y="144" width="828" height="244" rx="30" fill="#E2AC31"/>
+  <rect x="186" y="420" width="398" height="324" rx="30" fill="#151515"/>
+  <rect x="616" y="420" width="398" height="324" rx="30" fill="#F4EEE2" stroke="#DED4C2" stroke-width="2"/>
+  <text x="228" y="228" fill="#151515" font-family="Arial, sans-serif" font-size="42" font-weight="700">EVENT LAUNCH</text>
+  <text x="228" y="280" fill="#151515" font-family="Arial, sans-serif" font-size="22">Promotion placeholder for local campaigns</text>
+  <text x="228" y="518" fill="#E2AC31" font-family="Arial, sans-serif" font-size="28" font-weight="700">Date + offer</text>
+  <text x="658" y="518" fill="#151515" font-family="Arial, sans-serif" font-size="28" font-weight="700">Details + CTA</text>
+</svg>

@@ -1,0 +1,12 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" fill="#F4F1EA"/>
+  <rect x="134" y="84" width="932" height="732" rx="34" fill="#FFFDF8"/>
+  <rect x="190" y="150" width="820" height="132" rx="28" fill="#151515"/>
+  <rect x="190" y="324" width="360" height="420" rx="30" fill="#F5EFE4" stroke="#DED4C2" stroke-width="2"/>
+  <rect x="592" y="324" width="418" height="194" rx="30" fill="#E2AC31"/>
+  <rect x="592" y="550" width="418" height="194" rx="30" fill="#151515"/>
+  <text x="232" y="222" fill="#E2AC31" font-family="Arial, sans-serif" font-size="30" font-weight="700">Home services flyer</text>
+  <text x="232" y="262" fill="#FFFDF8" font-family="Arial, sans-serif" font-size="22">Roofing, HVAC, plumbing, and more</text>
+  <text x="632" y="430" fill="#151515" font-family="Arial, sans-serif" font-size="28" font-weight="700">Headline + offer</text>
+  <text x="632" y="652" fill="#FFFDF8" font-family="Arial, sans-serif" font-size="28" font-weight="700">Trust + CTA</text>
+</svg>

@@ -1,78 +1,60 @@
-import { ArrowRight, CheckCircle2, MapPinned, ShieldCheck } from "lucide-react";
-
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
-import { SampleArtwork } from "@/components/site/sample-artwork";
-import { siteContent } from "@/lib/site-content";
-
-const icons = [MapPinned, ShieldCheck, CheckCircle2];
+import Image from "next/image";
+import { MapPin, Sparkles } from "lucide-react";
 
 export function HeroVisual() {
   return (
-    <div className="relative">
-      <div className="absolute inset-x-10 top-10 h-48 rounded-full bg-[#f4a43a]/20 blur-3xl" />
-      <Card className="relative overflow-hidden border-white/70 bg-card/95 p-5 backdrop-blur">
-        <div className="absolute right-4 top-4 z-10">
-          <Badge variant="brand">Local service mockup</Badge>
-        </div>
-        <div className="grid gap-4 rounded-[1.6rem] border border-border bg-[#f8fbff] p-4 md:grid-cols-[1.1fr_0.9fr]">
-          <div className="relative min-h-[300px] overflow-hidden rounded-[1.45rem] bg-gradient-to-br from-[#eff5fc] to-white p-4">
-            <div className="absolute left-5 top-5 rounded-full bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#0d2a52] shadow-sm">
-              Design + Print + Delivery
-            </div>
-            <div className="absolute left-5 top-20 max-w-[15rem] text-3xl font-semibold leading-tight text-[#0d2a52]">
-              Flyer campaigns built for real local reach
-            </div>
-            <div className="absolute right-4 top-14 w-[44%] rotate-[10deg]">
-              <SampleArtwork variant="restaurant-flyer" compact />
-            </div>
-            <div className="absolute bottom-5 left-6 w-[46%] -rotate-[7deg]">
-              <SampleArtwork variant="door-hanger-front" compact />
-            </div>
-          </div>
-          <div className="flex flex-col justify-between gap-4 rounded-[1.45rem] bg-[#0d2a52] p-5 text-white">
-            <div className="space-y-3">
-              <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#f7c37e]">
-                Hamilton Flyer Delivery
-              </div>
-              <div className="text-2xl font-semibold leading-tight">
-                Choose the area. Approve the flyer. Launch the campaign.
-              </div>
-              <p className="text-sm leading-6 text-white/75">
-                Built for small business owners who want a clean process and a fast quote.
-              </p>
-            </div>
-            <div className="rounded-[1.2rem] bg-white/10 px-4 py-3 text-sm font-medium text-white/90">
-              Sample designs shown for demonstration
-            </div>
-            <div className="inline-flex items-center gap-2 text-sm font-semibold text-[#f7c37e]">
-              Get a Quote
-              <ArrowRight className="h-4 w-4" />
-            </div>
+    <div className="relative mx-auto w-full max-w-[620px]">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-12 rounded-full bg-[#f4a43a]/20 blur-[90px]" />
+      <div className="relative h-[430px] sm:h-[540px]">
+        <div aria-hidden="true" className="absolute inset-x-6 bottom-10 top-12 rounded-[2.5rem] border border-white/15 bg-white/[0.055] backdrop-blur-sm" />
+        <div className="absolute left-[1%] top-[17%] z-10 w-[48%] -rotate-[10deg] rounded-[1.5rem] border border-white/30 bg-[#e4ecf6] p-2 shadow-[0_22px_60px_rgba(0,0,0,0.28)] transition-transform duration-500 hover:-rotate-[6deg]">
+          <div className="relative aspect-[5/7] overflow-hidden rounded-[1rem] bg-white">
+            <Image
+              src="/flyer-templates/renovation-construction.png"
+              alt="Sample renovation and construction flyer design"
+              fill
+              priority
+              sizes="(max-width: 640px) 44vw, 275px"
+              className="object-contain"
+            />
           </div>
         </div>
-        <div className="mt-5 grid gap-3 sm:grid-cols-3">
-          {siteContent.home.hero.stats.map((stat, index) => {
-            const Icon = icons[index] ?? CheckCircle2;
-
-            return (
-              <div
-                key={stat.label}
-                className="rounded-[1.25rem] border border-border bg-background px-4 py-4"
-              >
-                <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-foreground">
-                  <Icon className="h-4 w-4 text-brand" />
-                  {stat.label}
-                </div>
-                <div className="text-lg font-semibold text-foreground">
-                  {stat.value}
-                </div>
-                <p className="mt-2 text-sm leading-6">{stat.detail}</p>
-              </div>
-            );
-          })}
+        <div className="absolute right-[2%] top-[5%] z-20 w-[49%] rotate-[8deg] rounded-[1.5rem] border border-white/30 bg-[#e4ecf6] p-2 shadow-[0_25px_65px_rgba(0,0,0,0.32)] transition-transform duration-500 hover:rotate-[4deg]">
+          <div className="relative aspect-[5/7] overflow-hidden rounded-[1rem] bg-white">
+            <Image
+              src="/flyer-templates/spice-of-india-front.png"
+              alt="Sample restaurant promotional flyer design"
+              fill
+              priority
+              sizes="(max-width: 640px) 44vw, 275px"
+              className="object-contain"
+            />
+          </div>
         </div>
-      </Card>
+        <div className="absolute bottom-[8%] left-[23%] z-30 w-[47%] -rotate-[2deg] rounded-[1.5rem] border border-white/30 bg-[#e4ecf6] p-2 shadow-[0_30px_70px_rgba(0,0,0,0.38)] transition-transform duration-500 hover:rotate-[2deg]">
+          <div className="relative aspect-[5/7] overflow-hidden rounded-[1rem] bg-white">
+            <Image
+              src="/flyer-templates/real-estate-homeowner-front.png"
+              alt="Sample real estate marketing flyer design"
+              fill
+              priority
+              sizes="(max-width: 640px) 42vw, 260px"
+              className="object-contain"
+            />
+          </div>
+        </div>
+        <div className="absolute bottom-[11%] right-0 z-40 hidden items-center gap-2 rounded-full border border-white/20 bg-[#ffffff] px-4 py-3 text-sm font-semibold text-[#0d223f] shadow-2xl sm:flex">
+          <Sparkles aria-hidden="true" className="h-4 w-4 text-[#d18416]" />
+          Design. Print. Deliver.
+        </div>
+        <div className="absolute left-[3%] top-[1%] z-30 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold text-white/90 backdrop-blur">
+          <MapPin aria-hidden="true" className="h-3.5 w-3.5 text-[#f4a43a]" />
+          Hamilton, Ontario
+        </div>
+      </div>
+      <p className="mt-1 text-center text-xs text-white/60">
+        Example flyer designs from our gallery
+      </p>
     </div>
   );
 }

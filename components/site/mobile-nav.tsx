@@ -14,7 +14,7 @@ export function MobileNav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <Button
         variant="outline"
         size="icon"
@@ -24,7 +24,7 @@ export function MobileNav() {
         {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
       </Button>
       {open ? (
-        <div className="fixed inset-x-0 top-[76px] z-40 border-y border-border bg-background/98 backdrop-blur">
+        <div className="absolute inset-x-0 top-full z-40 border-y border-border bg-background/98 backdrop-blur">
           <nav className="container-shell flex flex-col gap-2 py-6">
             {siteContent.navigation.main.map((item) => (
               <Link

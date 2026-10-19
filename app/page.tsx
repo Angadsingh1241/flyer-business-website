@@ -1,20 +1,13 @@
+import Image from "next/image";
 import Link from "next/link";
-import { MapPinned, MessageCircleMore, PhoneCall, Printer, SendToBack } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CheckCircle2, MapPin, MessageCircleMore, PhoneCall } from "lucide-react";
 
-import { HeroVisual } from "@/components/site/hero-visual";
 import { PortfolioGrid } from "@/components/site/portfolio-grid";
-import { PricingCard } from "@/components/site/pricing-card";
 import { QuoteForm } from "@/components/site/quote-form";
 import { Reveal } from "@/components/site/reveal";
-import { SectionHeading } from "@/components/site/section-heading";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { createPageMetadata } from "@/lib/metadata";
 import { siteContent } from "@/lib/site-content";
-import { formatCurrency, formatHomeCount } from "@/lib/utils";
-
-const serviceIcons = [SendToBack, MapPinned, Printer, MessageCircleMore];
+import { formatCurrency } from "@/lib/utils";
+import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
   title: "Hamilton Flyer Delivery | Flyer Design, Print and Delivery",
@@ -22,273 +15,215 @@ export const metadata = createPageMetadata({
   path: "/",
 });
 
-export default function HomePage() {
-  const featuredAreas = siteContent.serviceAreas.filter((area) => area.featured).slice(0, 4);
+const examples = [
+  { path: "/flyer-templates/spice-of-india-front.png", alt: "Sample restaurant flyer design", style: "left-[1%] top-[6%] w-[61%] -rotate-[8deg]" },
+  { path: "/flyer-templates/real-estate-homeowner-front.png", alt: "Sample real estate flyer design", style: "right-[2%] top-[0%] w-[43%] rotate-[7deg]" },
+  { path: "/flyer-templates/pressure-washing.png", alt: "Sample pressure washing flyer design", style: "bottom-[2%] left-[4%] w-[39%] rotate-[4deg]" },
+  { path: "/flyer-templates/renovation-construction.png", alt: "Sample renovation flyer design", style: "bottom-0 right-[15%] w-[45%] -rotate-[3deg]" },
+];
 
+function FlyerStack() {
+  return (
+    <div className="relative mx-auto aspect-square w-full max-w-[540px]" aria-label="Examples of printed flyer design styles">
+      {examples.map(({ path, alt, style }) => (
+        <div key={path} className={`absolute overflow-hidden rounded-sm border-4 border-white bg-white shadow-paper transition-transform duration-300 hover:rotate-0 ${style}`}>
+          <div className="relative aspect-[3/4]">
+            <Image src={path} alt={alt} fill sizes="(max-width: 640px) 50vw, 285px" className="object-cover" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+const rates = [
+  {
+    number: "01",
+    name: "Complete package",
+    detail: "We handle design, printing, and door-to-door delivery.",
+    standard: siteContent.pricing.plans[0].startingAt,
+    hanger: siteContent.pricing.plans[1].startingAt,
+  },
+  {
+    number: "02",
+    name: "Delivery only",
+    detail: "Already have printed flyers? We distribute them.",
+    standard: siteContent.pricing.plans[0].deliveryOnlyAt,
+    hanger: siteContent.pricing.plans[1].deliveryOnlyAt,
+  },
+];
+
+export default function HomePage() {
   return (
     <>
-      <section className="section-shell overflow-hidden">
+      <section className="relative overflow-hidden paper-grain">
+        <div className="container-shell grid items-center gap-7 py-16 md:grid-cols-[1.02fr_0.98fr] md:gap-10 md:py-24">
+          <Reveal className="relative z-10">
+            <p className="eyebrow text-[#a46612]">Hamilton, Ontario · Door-to-door flyer marketing</p>
+            <h1 className="mt-6 max-w-[690px] text-5xl leading-[1.02] text-foreground sm:text-6xl lg:text-[5.3rem]">
+              Your flyer, on <em className="font-normal text-[#b26b15]">every</em> doorstep that matters.
+            </h1>
+            <p className="mt-7 max-w-xl text-lg leading-8 text-muted-foreground md:text-xl">
+              We design, print and deliver flyers and door hangers across Hamilton — or deliver the ones you already have.
+            </p>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Link href="/contact" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#f4a43a] px-7 text-sm font-bold text-[#091e39] shadow-paper transition hover:-translate-y-0.5 hover:bg-[#ffc16d]">
+                Get a Free Quote <ArrowRight aria-hidden="true" className="h-4 w-4" />
+              </Link>
+              <Link href="/pricing" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-[#091e39] px-7 text-sm font-bold text-[#091e39] transition hover:bg-[#091e39] hover:text-white">
+                View Pricing
+              </Link>
+            </div>
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
+              <span className="inline-flex items-center gap-2"><CheckCircle2 aria-hidden="true" className="h-4 w-4 text-success" /> Design, print & delivery</span>
+              <span className="inline-flex items-center gap-2"><CheckCircle2 aria-hidden="true" className="h-4 w-4 text-success" /> Delivery-only available</span>
+            </div>
+            <p className="mt-7 border-t border-border pt-5 text-sm">
+              Complete standard flyer packages from <strong className="text-foreground">{formatCurrency(siteContent.pricing.plans[0].startingAt)} per home</strong>, including design and print.
+            </p>
+          </Reveal>
+          <Reveal delay={0.06}>
+            <FlyerStack />
+            <p className="mt-4 text-center text-xs text-muted-foreground">Sample designs from our flyer gallery</p>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="bg-[#091e39] text-white">
+        <div className="container-shell py-16 md:py-20">
+          <div className="flex flex-wrap items-end justify-between gap-5">
+            <div>
+              <p className="eyebrow text-[#f4a43a]">Two ways to order</p>
+              <h2 className="mt-4 max-w-2xl text-4xl leading-[1.1] text-white md:text-5xl">One simple price per home.</h2>
+            </div>
+            <Link href="/pricing" className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#f4a43a] underline decoration-[#f4a43a] underline-offset-8 hover:text-white">
+              Calculate your campaign <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="mt-12 grid gap-10 md:grid-cols-2 md:gap-0">
+            {rates.map((item, index) => (
+              <div key={item.number} className={`border-t border-white/20 pt-7 md:pr-12 ${index ? "md:border-l md:pl-12" : ""}`}>
+                <p className="eyebrow text-[#f4a43a]">{item.number} / {item.name}</p>
+                <h3 className="mt-4 text-3xl text-white md:text-4xl">{item.name}</h3>
+                <p className="mt-3 text-base leading-7 text-white/70">{item.detail}</p>
+                <dl className="mt-8 grid grid-cols-2 gap-5">
+                  <div>
+                    <dt className="text-sm text-white/60">Standard flyer</dt>
+                    <dd className="mt-1 font-editorial text-4xl">{formatCurrency(item.standard)} <span className="font-sans text-sm text-white/60">/home</span></dd>
+                  </div>
+                  <div>
+                    <dt className="text-sm text-white/60">Door hanger</dt>
+                    <dd className="mt-1 font-editorial text-4xl">{formatCurrency(item.hanger)} <span className="font-sans text-sm text-white/60">/home</span></dd>
+                  </div>
+                </dl>
+              </div>
+            ))}
+          </div>
+          <p className="mt-8 text-xs text-white/60">Prices in CAD per home. Final routes, quantities, specifications and applicable taxes are confirmed in your quote.</p>
+        </div>
+      </section>
+
+      <section className="section-shell">
+        <div className="container-shell grid gap-12 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:gap-20">
+          <div>
+            <p className="eyebrow text-[#a46612]">What we do</p>
+            <h2 className="mt-5 max-w-lg text-4xl leading-[1.13] md:text-5xl">Everything your local campaign needs.</h2>
+            <p className="mt-5 max-w-md">Whether you have a completed design or need help from the first idea, we make it easier to reach homes in your service area.</p>
+            <Link href="/services" className="mt-7 inline-flex min-h-11 items-center gap-2 font-semibold text-foreground underline decoration-2 decoration-[#f4a43a] underline-offset-8">
+              Explore our services <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+            </Link>
+          </div>
+          <ol className="divide-y divide-border border-y border-border">
+            {siteContent.services.map((service, index) => (
+              <li key={service.slug} className="group flex items-start gap-5 py-6 md:gap-7">
+                <span className="shrink-0 font-editorial text-lg text-[#ad711e]">{String(index + 1).padStart(2, "0")}</span>
+                <div className="flex-1">
+                  <Link href="/services" className="group-hover:text-[#a46612]">
+                    <h3 className="text-2xl leading-tight md:text-3xl">{service.title}</h3>
+                  </Link>
+                  <p className="mt-2 text-sm leading-6">{service.summary}</p>
+                </div>
+                <ArrowUpRight aria-hidden="true" className="mt-2 h-5 w-5 shrink-0 text-[#a46612]" />
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="bg-[#eee8dc]">
+        <div className="container-shell py-16 md:py-24">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <p className="eyebrow text-[#a46612]">Local delivery coverage</p>
+              <h2 className="mt-5 max-w-2xl text-4xl leading-tight md:text-5xl">Across the city, street by street.</h2>
+            </div>
+            <Link href="/areas-served" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-brand px-6 text-sm font-bold text-white transition hover:bg-[#214467]">
+              Explore delivery areas <MapPin aria-hidden="true" className="h-4 w-4" />
+            </Link>
+          </div>
+          <p className="mt-10 font-editorial text-2xl leading-relaxed text-foreground/85 md:text-3xl">
+            {siteContent.serviceAreas.map((area, index) => (
+              <span key={area.slug}><span className="whitespace-nowrap">{area.name}</span>{index < siteContent.serviceAreas.length - 1 ? <span aria-hidden="true" className="mx-3 text-[#be7a1c]">/</span> : null}{" "}</span>
+            ))}
+          </p>
+          <p className="mt-6 text-sm">Choose areas or postal codes on our map to plan the most relevant campaign for your business.</p>
+        </div>
+      </section>
+
+      <section className="section-shell">
         <div className="container-shell">
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-center">
-            <Reveal className="space-y-8">
-              <Badge variant="brand">{siteContent.home.hero.eyebrow}</Badge>
-              <div className="space-y-5">
-                <h1 className="max-w-3xl text-5xl font-semibold tracking-[-0.06em] text-balance text-foreground md:text-7xl">
-                  {siteContent.home.hero.headline}
-                </h1>
-                <p className="max-w-2xl text-lg md:text-xl">
-                  {siteContent.home.hero.description}
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-3">
-                <Button asChild variant="brand" size="lg">
-                  <Link href="/contact">{siteContent.home.hero.primaryCta}</Link>
-                </Button>
-                <Button asChild variant="outline" size="lg">
-                  <Link href="/pricing">{siteContent.home.hero.secondaryCta}</Link>
-                </Button>
-                <Button asChild variant="outline" size="lg">
-                  <a href={siteContent.business.whatsappHref}>
-                    {siteContent.home.hero.tertiaryCta}
-                  </a>
-                </Button>
-              </div>
-
-              <div className="grid gap-3 sm:grid-cols-3">
-                {siteContent.home.hero.supportingPoints.map((point) => (
-                  <div
-                    key={point}
-                    className="rounded-[1.25rem] border border-border bg-white px-4 py-4 text-sm font-medium text-foreground shadow-sm"
-                  >
-                    {point}
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
-                <a href={siteContent.business.phoneHref} className="inline-flex items-center gap-2">
-                  <PhoneCall className="h-4 w-4 text-brand" />
-                  {siteContent.business.phoneDisplay}
-                </a>
-                <span className="text-border">&bull;</span>
-                <a href={siteContent.business.whatsappHref} className="inline-flex items-center gap-2">
-                  <MessageCircleMore className="h-4 w-4 text-brand" />
-                  Quick quote on WhatsApp
-                </a>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.1}>
-              <HeroVisual />
-            </Reveal>
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <p className="eyebrow text-[#a46612]">Our design gallery</p>
+              <h2 className="mt-5 max-w-2xl text-4xl leading-tight md:text-5xl">Built to be noticed at the door.</h2>
+              <p className="mt-4 max-w-xl">Explore real sample layouts and see what kind of flyer could work for your next local campaign.</p>
+            </div>
+            <Link href="/templates" className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-foreground underline decoration-[#f4a43a] decoration-2 underline-offset-8">
+              Browse all designs <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+            </Link>
           </div>
+          <div className="mt-12"><PortfolioGrid items={siteContent.portfolio.items.slice(0, 3)} /></div>
+          <p className="mt-5 text-xs">{siteContent.portfolio.note}</p>
         </div>
       </section>
 
-      <section className="section-shell">
-        <div className="container-shell space-y-12">
-          <SectionHeading
-            eyebrow={siteContent.home.servicesIntro.eyebrow}
-            title={siteContent.home.servicesIntro.title}
-            description={siteContent.home.servicesIntro.description}
-          />
-
-          <div className="grid gap-6 lg:grid-cols-4">
-            {siteContent.services.map((service, index) => {
-              const Icon = serviceIcons[index] ?? SendToBack;
-
-              return (
-                <Reveal key={service.slug} delay={index * 0.05}>
-                  <Card className="h-full border-white/80 bg-white/92 p-6">
-                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand/10 text-brand">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <h2 className="mt-5 text-2xl font-semibold text-foreground">
-                      {service.title}
-                    </h2>
-                    <p className="mt-3">{service.summary}</p>
-                  </Card>
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-shell bg-white/60">
-        <div className="container-shell space-y-12">
-          <SectionHeading
-            eyebrow={siteContent.home.pricingIntro.eyebrow}
-            title={siteContent.home.pricingIntro.title}
-            description={siteContent.home.pricingIntro.description}
-          />
-
-          <div className="grid gap-6 lg:grid-cols-2">
-            {siteContent.pricing.plans.map((plan, index) => (
-              <Reveal key={plan.slug} delay={index * 0.05}>
-                <PricingCard plan={plan} />
-              </Reveal>
-            ))}
-          </div>
-
-          <div className="grid gap-6 lg:grid-cols-4">
-            {siteContent.pricing.packages.map((pkg, index) => (
-              <Reveal key={pkg.slug} delay={index * 0.05}>
-                <Card className="h-full border-white/80 bg-white/92 p-6">
-                  <div className="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                    Example package
-                  </div>
-                  <h3 className="mt-3 text-2xl font-semibold text-foreground">{pkg.title}</h3>
-                  <div className="mt-4 text-4xl font-semibold text-foreground">
-                    {formatCurrency(pkg.priceFrom)}
-                  </div>
-                  <p className="mt-3">{pkg.summary}</p>
-                  <p className="mt-3 text-sm">{pkg.audience}</p>
-                  <ul className="mt-5 grid gap-2 text-sm text-muted-foreground">
-                    {pkg.includes.map((item) => (
-                      <li key={item} className="flex gap-2">
-                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-brand" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button asChild variant="outline" className="mt-6 w-full">
-                    <Link href="/contact">{pkg.ctaLabel}</Link>
-                  </Button>
-                </Card>
-              </Reveal>
-            ))}
-          </div>
-
-          <p className="text-sm text-muted-foreground">{siteContent.pricing.disclaimer}</p>
-        </div>
-      </section>
-
-      <section className="section-shell">
-        <div className="container-shell space-y-12">
-          <SectionHeading
-            eyebrow={siteContent.home.areasIntro.eyebrow}
-            title={siteContent.home.areasIntro.title}
-            description={siteContent.home.areasIntro.description}
-          />
-
-          <div className="grid gap-6 lg:grid-cols-3">
-            {[
-              {
-                title: "By city or area",
-                description:
-                  "Start with Hamilton, Ancaster, Dundas, Waterdown, Stoney Creek, or a major area like Hamilton Mountain.",
-              },
-              {
-                title: "By postal code",
-                description:
-                  "Use postal prefixes like L8N, L9G, L8B, or L9H when you want tighter geographic targeting.",
-              },
-              {
-                title: "Advanced targeting",
-                description:
-                  "Open advanced targeting only if you want to combine multiple neighbourhoods or narrow the route further.",
-              },
-            ].map((item) => (
-              <Card key={item.title} className="border-white/80 bg-white/92 p-6">
-                <h3 className="text-2xl font-semibold text-foreground">{item.title}</h3>
-                <p className="mt-3">{item.description}</p>
-              </Card>
-            ))}
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {featuredAreas.map((area) => (
-              <Card key={area.slug} className="border-white/80 bg-white/92 p-6">
-                <div className="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                  {formatHomeCount(area.homes)} homes
-                </div>
-                <h3 className="mt-3 text-2xl font-semibold text-foreground">{area.name}</h3>
-                <p className="mt-3">{area.notes}</p>
-                <p className="mt-4 text-sm">Postal codes: {area.postalPrefixes.join(", ")}</p>
-              </Card>
-            ))}
-          </div>
-
-          <Button asChild variant="outline">
-            <Link href="/areas-served">View all areas and map</Link>
-          </Button>
-        </div>
-      </section>
-
-      <section className="section-shell bg-white/60">
-        <div className="container-shell space-y-12">
-          <SectionHeading
-            eyebrow={siteContent.home.samplesIntro.eyebrow}
-            title={siteContent.home.samplesIntro.title}
-            description={siteContent.home.samplesIntro.description}
-          />
-          <PortfolioGrid items={siteContent.portfolio.items} />
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-muted-foreground">{siteContent.portfolio.note}</p>
-            <Button asChild variant="outline">
-              <Link href="/templates">View all templates</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-shell">
-        <div className="container-shell space-y-12">
-          <SectionHeading
-            eyebrow={siteContent.home.howItWorksIntro.eyebrow}
-            title={siteContent.home.howItWorksIntro.title}
-            description={siteContent.home.howItWorksIntro.description}
-          />
-
-          <div className="grid gap-6 lg:grid-cols-4">
-            {siteContent.howItWorks.steps.map((step, index) => (
-              <Reveal key={step.number} delay={index * 0.05}>
-                <Card className="h-full border-white/80 bg-white/92 p-6">
-                  <div className="text-sm font-semibold uppercase tracking-[0.18em] text-brand">
-                    Step {step.number}
-                  </div>
-                  <h3 className="mt-4 text-2xl font-semibold text-foreground">{step.title}</h3>
-                  <p className="mt-3">{step.description}</p>
-                </Card>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-shell">
-        <div className="container-shell grid gap-8 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:items-start">
-          <div className="space-y-6">
-            <SectionHeading
-              eyebrow="Get a quote"
-              title={siteContent.home.finalCta.title}
-              description={siteContent.home.finalCta.description}
-            />
-            <div className="grid gap-4">
-              {[
-                "Local Hamilton service",
-                "Flyer delivery and door hangers",
-                "Sample designs shown honestly while real assets are being added",
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="rounded-[1.25rem] border border-border bg-white px-4 py-4 text-sm font-medium text-foreground shadow-sm"
-                >
-                  {item}
-                </div>
-              ))}
+      <section className="section-shell border-t border-border bg-white/50">
+        <div className="container-shell">
+          <div className="mb-9 flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <p className="eyebrow text-[#a46612]">How it works</p>
+              <h2 className="mt-5 max-w-3xl text-4xl leading-tight md:text-5xl">Four simple steps from your idea to local doorsteps.</h2>
             </div>
           </div>
+          <div className="grid gap-5 border-t border-border pt-7 sm:grid-cols-2 lg:grid-cols-4">
+            {siteContent.howItWorks.steps.map((step) => (
+              <div key={step.number} className="border-b border-border pb-6 lg:border-b-0">
+                <p className="eyebrow text-[#a46612]">Step {step.number}</p>
+                <h3 className="mt-5 text-2xl">{step.title}</h3>
+                <p className="mt-3 text-sm leading-6">{step.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <QuoteForm
-            title="Fast quote request"
-            description="Send the basics now. Optional details are there if you want to include them."
-            submitLabel="Send on WhatsApp"
-            source="homepage-form"
-            variant="home"
-          />
+      <section className="section-shell bg-[#eae2d6]">
+        <div className="container-shell grid gap-10 lg:grid-cols-[minmax(0,0.76fr)_minmax(0,1.24fr)] lg:items-start lg:gap-16">
+          <div className="space-y-6 lg:sticky lg:top-32">
+            <p className="eyebrow text-[#a46612]">Get started</p>
+            <h2 className="text-4xl leading-tight md:text-5xl">Tell us the neighbourhoods. We’ll plan the route.</h2>
+            <p>Tell us your target location, quantity and flyer type. Your request opens in WhatsApp with the details ready to send.</p>
+            <div className="space-y-3 border-t border-border pt-6">
+              <p className="flex items-center gap-3 text-sm font-semibold text-foreground"><CheckCircle2 aria-hidden="true" className="h-4 w-4 text-success" /> Design, print and delivery available</p>
+              <p className="flex items-center gap-3 text-sm font-semibold text-foreground"><CheckCircle2 aria-hidden="true" className="h-4 w-4 text-success" /> Delivery-only packages available</p>
+              <p className="flex items-center gap-3 text-sm font-semibold text-foreground"><CheckCircle2 aria-hidden="true" className="h-4 w-4 text-success" /> Choose by area or postal code</p>
+            </div>
+            <div className="flex flex-wrap gap-4 text-sm">
+              <a href={siteContent.business.phoneHref} className="inline-flex items-center gap-2 font-semibold underline underline-offset-4"><PhoneCall className="h-4 w-4" /> {siteContent.business.phoneDisplay}</a>
+              <a href={siteContent.business.whatsappHref} className="inline-flex items-center gap-2 font-semibold underline underline-offset-4"><MessageCircleMore className="h-4 w-4" /> WhatsApp</a>
+            </div>
+          </div>
+          <QuoteForm title="Request your campaign quote" description="Share a few details. Optional campaign specifications are further down." submitLabel="Send on WhatsApp" source="homepage-form" variant="home" />
         </div>
       </section>
     </>

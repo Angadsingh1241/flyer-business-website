@@ -7,36 +7,21 @@ import { siteContent } from "@/lib/site-content";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-border/70 bg-background/92 backdrop-blur-xl">
-      <div className="border-b border-border/70 bg-white/55">
-        <div className="container-shell flex items-center justify-between gap-4 py-2 text-xs uppercase tracking-[0.16em] text-muted-foreground">
-          <span>{siteContent.business.location} local flyer service</span>
-          <span className="hidden md:inline">
-            {siteContent.business.responsePromise}
-          </span>
-        </div>
-      </div>
-      <div className="container-shell flex items-center justify-between gap-4 py-4">
+    <header className="sticky top-0 z-50 border-b border-[#ddd5c7] bg-[#f9f6ef]/95 backdrop-blur-xl">
+      <div className="container-shell flex min-h-[74px] items-center justify-between gap-5 py-3">
         <Logo />
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav aria-label="Main navigation" className="hidden items-center gap-6 lg:flex">
           {siteContent.navigation.main.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-sm font-medium text-foreground transition hover:text-muted-foreground"
-            >
+            <Link key={item.href} href={item.href} className="text-sm font-semibold text-[#091e39]/80 underline-offset-8 transition-colors hover:text-[#b26b15] hover:underline focus-visible:rounded-sm">
               {item.label}
             </Link>
           ))}
         </nav>
-        <div className="hidden items-center gap-3 md:flex">
-          <Button asChild variant="outline">
-            <Link href="/pricing">View Pricing</Link>
-          </Button>
-          <Button asChild variant="outline">
-            <a href={siteContent.business.whatsappHref}>Message on WhatsApp</a>
-          </Button>
-          <Button asChild variant="brand">
+        <div className="hidden items-center gap-4 lg:flex">
+          <a href={siteContent.business.phoneHref} className="text-sm font-semibold text-[#091e39] transition hover:text-[#b26b15]">
+            {siteContent.business.phoneDisplay}
+          </a>
+          <Button asChild variant="brand" className="min-h-11">
             <Link href="/contact">Get a Quote</Link>
           </Button>
         </div>

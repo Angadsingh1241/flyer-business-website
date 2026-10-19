@@ -48,6 +48,7 @@ export type PricingPlan = {
   title: string;
   deliveryType: "standard-bundle" | "door-hanger" | "custom-targeted";
   startingAt: number;
+  deliveryOnlyAt: number;
   description: string;
   idealFor: string;
   includes: string[];
@@ -56,6 +57,8 @@ export type PricingPlan = {
 
 export type PricingPackage = {
   slug: string;
+  deliveryType: "standard-bundle" | "door-hanger";
+  fulfillment: "complete" | "delivery-only";
   title: string;
   priceFrom: number;
   summary: string;
@@ -104,7 +107,7 @@ export const siteContent = {
     siteUrl: "https://www.hamiltonflyerdelivery.com",
     responsePromise: "Local service, clear pricing, and quick replies.",
     proofNote:
-      "Sample designs are shown for demonstration while real campaign photos are being added.",
+      "Gallery images show flyer design samples; campaign photos will be added as available.",
   },
   seo: {
     defaultTitle: "Hamilton Flyer Delivery | Design, Print and Door-to-Door Distribution",
@@ -131,35 +134,22 @@ export const siteContent = {
   },
   home: {
     hero: {
-      eyebrow: "Hamilton flyer delivery",
-      headline:
-        "Flyer design, print, and delivery for Hamilton businesses.",
+      eyebrow: "LOCAL FLYER MARKETING IN HAMILTON",
+      headline: "Reach more local customers. One door at a time.",
       description:
-        "Reach homes across Hamilton with flyer delivery, door hanger campaigns, and design + print support in one simple local service.",
+        "Flyer design, printing, and door-to-door delivery across Hamilton and nearby communities. Pick your area, choose your format, and let us handle the rest.",
       primaryCta: "Get a Quote",
-      secondaryCta: "View Pricing",
+      secondaryCta: "See Our Pricing",
       tertiaryCta: "Message on WhatsApp",
       supportingPoints: [
-        "Flyer delivery",
-        "Door hanger delivery",
-        "Target by area or postal code",
+        "Neighbourhood targeting",
+        "Design + printing available",
+        "Flexible campaigns",
       ],
       stats: [
-        {
-          label: "Coverage",
-          value: "Hamilton + nearby",
-          detail: "Choose the areas that fit your business",
-        },
-        {
-          label: "Services",
-          value: "Design, print, delivery",
-          detail: "Handled together or quoted separately",
-        },
-        {
-          label: "Quote flow",
-          value: "Fast and simple",
-          detail: "Send a quote request straight to WhatsApp",
-        },
+        { label: "Area", value: "Hamilton + nearby", detail: "Reach the neighbourhoods that matter" },
+        { label: "Complete service", value: "From $0.25 / home", detail: "Standard flyer design, print & delivery" },
+        { label: "Delivery only", value: "From $0.20 / home", detail: "Already have printed flyers? We deliver" },
       ],
     },
     servicesIntro: {
@@ -170,9 +160,9 @@ export const siteContent = {
     },
     pricingIntro: {
       eyebrow: "Pricing",
-      title: "Clear starting rates and example campaign packages.",
+      title: "A straightforward price for every doorstep.",
       description:
-        "See the base rates first, then use the example packages to get a better feel for what a campaign could look like.",
+        "Choose complete design, print & delivery, or delivery only when your flyers are ready. Compare both options without hidden add-ons.",
     },
     areasIntro: {
       eyebrow: "Areas we cover",
@@ -231,6 +221,7 @@ export const siteContent = {
         "Choose this when you want stronger visibility than a standard flyer bundle.",
       whatIsIncluded: [
         "Door hanger route planning",
+        "Design and printing with full service",
         "Premium placement format",
         "Proof of delivery available",
         "Targeted area recommendations",
@@ -285,135 +276,118 @@ export const siteContent = {
   pricing: {
     intro: {
       eyebrow: "Pricing",
-      title: "Straightforward pricing for local flyer campaigns.",
+      title: "Clear per-home pricing. No guesswork.",
       description:
-        "Start with the delivery rate, then add design or printing if you need them. Final pricing depends on quantity, area, print specs, and delivery type.",
+        "Our complete service includes flyer design, printing, and distribution. Already have your printed materials? Choose delivery only. All prices are in Canadian dollars.",
     },
     plans: [
       {
         slug: "standard-bundle",
-        title: "Standard Flyer Bundle",
+        title: "Standard Flyers",
         deliveryType: "standard-bundle",
-        startingAt: 0.35,
+        startingAt: 0.25,
+        deliveryOnlyAt: 0.20,
         description:
-          "Cost-efficient flyer delivery for broad neighbourhood coverage.",
+          "A cost-effective way to reach homes in your preferred Hamilton neighbourhoods.",
         idealFor:
-          "Restaurants, promotions, menus, salons, gyms, and repeat local campaigns.",
+          "Restaurant menus, local offers, openings, promotions, and repeat campaigns.",
         includes: [
-          "Bundled flyer delivery",
+          "Design and printing with the complete package",
           "Neighbourhood route planning",
-          "Lower starting rate per home",
-          "Optional design and print add-ons",
+          "Door-to-door distribution",
+          "Delivery-only option for ready-to-distribute flyers",
         ],
-        ctaLabel: "Get a Quote",
+        ctaLabel: "Request a Quote",
       },
       {
         slug: "door-hanger",
-        title: "Door Hanger Delivery",
+        title: "Door Hangers",
         deliveryType: "door-hanger",
-        startingAt: 0.7,
+        startingAt: 0.45,
+        deliveryOnlyAt: 0.35,
         description:
-          "Premium delivery format for more visibility at the door.",
+          "Prominent doorstep placement for campaigns that need extra attention.",
         idealFor:
-          "Contractors, realtors, premium services, launches, and standout offers.",
+          "Home services, contractors, realtors, seasonal offers, and local promotions.",
         includes: [
-          "Door hanger distribution",
-          "Targeted route planning",
-          "Premium placement style",
-          "Proof of delivery available",
+          "Design and printing with the complete package",
+          "Door hanger distribution and route planning",
+          "Target by neighbourhood or postal code",
+          "Delivery-only option for ready-to-distribute hangers",
         ],
-        ctaLabel: "Get a Quote",
+        ctaLabel: "Request a Quote",
       },
     ] satisfies PricingPlan[],
     packages: [
       {
-        slug: "starter-campaign",
-        title: "Starter Campaign",
-        priceFrom: 595,
-        summary: "A simple first campaign for smaller local coverage.",
-        audience: "Good for local promotions, menus, openings, and service launches.",
-        includes: [
-          "Standard flyer delivery",
-          "Approx. 1,500-home route",
-          "Basic area planning",
-        ],
-        ctaLabel: "Get a Quote",
+        slug: "standard-complete-2500",
+        deliveryType: "standard-bundle",
+        fulfillment: "complete",
+        title: "Standard flyers — complete",
+        priceFrom: 625,
+        summary: "2,500 homes × $0.25 per home.",
+        audience: "For businesses that want everything handled.",
+        includes: ["Flyer design", "Printing", "Door-to-door delivery"],
+        ctaLabel: "Get This Quote",
       },
       {
-        slug: "growth-campaign",
-        title: "Growth Campaign",
-        priceFrom: 1250,
-        summary: "A larger campaign for stronger reach across selected areas.",
-        audience: "Good for businesses that want more consistent local visibility.",
-        includes: [
-          "Standard flyer delivery",
-          "Approx. 3,500-home route",
-          "Area targeting support",
-        ],
-        ctaLabel: "Get a Quote",
+        slug: "standard-delivery-2500",
+        deliveryType: "standard-bundle",
+        fulfillment: "delivery-only",
+        title: "Standard flyers — delivery only",
+        priceFrom: 500,
+        summary: "2,500 homes × $0.20 per home.",
+        audience: "For businesses supplying printed flyers.",
+        includes: ["Delivery route planning", "Door-to-door distribution", "Customer-supplied printed flyers"],
+        ctaLabel: "Get This Quote",
       },
       {
-        slug: "door-hanger-campaign",
-        title: "Door Hanger Campaign",
-        priceFrom: 1495,
-        summary: "A premium campaign built around stronger door-to-door presence.",
-        audience: "Good for higher-value services and premium local offers.",
-        includes: [
-          "Door hanger delivery",
-          "Approx. 2,000 homes",
-          "Proof of delivery available",
-        ],
-        ctaLabel: "Get a Quote",
+        slug: "hanger-complete-2500",
+        deliveryType: "door-hanger",
+        fulfillment: "complete",
+        title: "Door hangers — complete",
+        priceFrom: 1125,
+        summary: "2,500 homes × $0.45 per home.",
+        audience: "For prominent doorstep advertising.",
+        includes: ["Door hanger design", "Printing", "Door hanger distribution"],
+        ctaLabel: "Get This Quote",
       },
       {
-        slug: "bundle-design-print-delivery",
-        title: "Design + Print + Delivery Bundle",
-        priceFrom: 895,
-        summary: "A practical bundled option when you need everything handled together.",
-        audience: "Good for first-time campaigns and businesses without ready artwork.",
-        includes: [
-          "Flyer design",
-          "Print coordination",
-          "Delivery planning and route setup",
-        ],
-        ctaLabel: "Get a Quote",
+        slug: "hanger-delivery-2500",
+        deliveryType: "door-hanger",
+        fulfillment: "delivery-only",
+        title: "Door hangers — delivery only",
+        priceFrom: 875,
+        summary: "2,500 homes × $0.35 per home.",
+        audience: "For businesses supplying printed door hangers.",
+        includes: ["Delivery route planning", "Door hanger distribution", "Customer-supplied printed hangers"],
+        ctaLabel: "Get This Quote",
       },
     ] satisfies PricingPackage[],
-    addOns: {
-      designStartingAt: 95,
-      printMinimum: 85,
-      printPerHomeEstimate: 0.12,
-      customTargetedStartingAt: 0.55,
-    },
     comparisonRows: [
       {
-        feature: "Starting price",
-        standard: "From 35 cents per home",
-        doorHanger: "From 70 cents per home",
+        feature: "Complete service — per home",
+        standard: "$0.25 (design + print + delivery)",
+        doorHanger: "$0.45 (design + print + delivery)",
       },
       {
-        feature: "Format",
-        standard: "Bundled flyer delivery",
-        doorHanger: "Premium door hanger placement",
+        feature: "Delivery only — per home",
+        standard: "$0.20 (you supply printed flyers)",
+        doorHanger: "$0.35 (you supply printed hangers)",
       },
       {
-        feature: "Best for",
-        standard: "Broader reach and repeat campaigns",
-        doorHanger: "Higher visibility and premium offers",
+        feature: "Best suited for",
+        standard: "Wide local reach, menus and repeat promotions",
+        doorHanger: "More visible doorstep offers and home services",
       },
       {
-        feature: "Proof of delivery",
-        standard: "Available on selected custom campaigns",
-        doorHanger: "Available",
-      },
-      {
-        feature: "Planning style",
-        standard: "Efficient route coverage",
-        doorHanger: "More selective premium route planning",
+        feature: "Route planning",
+        standard: "Included",
+        doorHanger: "Included",
       },
     ],
     disclaimer:
-      "Example package pricing is for planning only. Final quotes depend on quantity, target area, design scope, print specs, and delivery details.",
+      "Illustrative totals use the stated per-home rates. Final route, quantities, artwork and print specifications, any applicable taxes, and scheduling are confirmed in your quote.",
   },
   serviceAreas: [
     {

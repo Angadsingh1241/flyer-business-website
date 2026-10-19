@@ -29,6 +29,8 @@ type QuoteFormProps = {
   initialCities?: string[];
   initialPostalCodes?: string[];
   initialDeliveryType?: string;
+  initialFulfillment?: "complete" | "delivery-only";
+  initialQuantity?: string;
 };
 
 type SubmitState =
@@ -83,6 +85,8 @@ export function QuoteForm({
   initialCities = [],
   initialPostalCodes = [],
   initialDeliveryType,
+  initialFulfillment = "complete",
+  initialQuantity = "",
 }: QuoteFormProps) {
   const [submitState, setSubmitState] = useState<SubmitState>({ type: "idle" });
   const [targetMode, setTargetMode] = useState<TargetMode>("areas");
@@ -94,9 +98,9 @@ export function QuoteForm({
       phone: "",
       email: "",
       preferredContactMethod: "whatsapp",
-      serviceNeeded: ["flyer-delivery"],
-      needDesign: "yes",
-      needPrinting: "yes",
+      serviceNeeded: initialDeliveryType === "door-hanger" ? ["door-hanger-delivery"] : ["flyer-delivery"],
+      needDesign: initialFulfillment === "delivery-only" ? "no" : "yes",
+      needPrinting: initialFulfillment === "delivery-only" ? "no" : "yes",
       deliveryType:
         initialDeliveryType &&
         siteContent.contact.deliveryTypes.some(
@@ -104,7 +108,7 @@ export function QuoteForm({
         )
           ? initialDeliveryType
           : "standard-bundle",
-      quantity: "",
+      quantity: initialQuantity,
       targetAreas: initialAreas.filter((value) =>
         siteContent.serviceAreas.some((area) => area.slug === value),
       ),
@@ -119,7 +123,7 @@ export function QuoteForm({
       extraDetails: "",
       source,
     }),
-    [initialAreas, initialCities, initialDeliveryType, initialPostalCodes, source],
+    [initialAreas, initialCities, initialDeliveryType, initialFulfillment, initialPostalCodes, initialQuantity, source],
   );
 
   const {
@@ -208,7 +212,7 @@ export function QuoteForm({
           <input type="hidden" {...register("source")} />
 
           <div className="rounded-[1.35rem] border border-border bg-[#f8fbff] px-4 py-4 text-sm text-muted-foreground">
-            Start with the basics. Optional campaign details are below if you want to include them now.
+            Complete service includes design, printing and delivery. For delivery-only pricing, supply your printed materials. Additional campaign details are optional below.
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">

@@ -48,7 +48,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
     resolvedSearchParams?.fulfillment === "delivery-only" ? "delivery-only" : "complete";
   const initialQuantity =
     typeof resolvedSearchParams?.quantity === "string" &&
-    /^\\d{1,7}$/.test(resolvedSearchParams.quantity)
+    /^\d{1,7}$/.test(resolvedSearchParams.quantity)
       ? resolvedSearchParams.quantity
       : undefined;
 

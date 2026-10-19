@@ -20,6 +20,8 @@ type ContactPageProps = {
     cities?: string | string[];
     postalCodes?: string | string[];
     deliveryType?: string | string[];
+    fulfillment?: string | string[];
+    quantity?: string | string[];
   }>;
 };
 
@@ -40,6 +42,14 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
   const initialDeliveryType =
     typeof resolvedSearchParams?.deliveryType === "string"
       ? resolvedSearchParams.deliveryType
+      : undefined;
+
+  const initialFulfillment =
+    resolvedSearchParams?.fulfillment === "delivery-only" ? "delivery-only" : "complete";
+  const initialQuantity =
+    typeof resolvedSearchParams?.quantity === "string" &&
+    /^\\d{1,7}$/.test(resolvedSearchParams.quantity)
+      ? resolvedSearchParams.quantity
       : undefined;
 
   return (
@@ -113,6 +123,8 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
             initialCities={initialCities}
             initialPostalCodes={initialPostalCodes}
             initialDeliveryType={initialDeliveryType}
+            initialFulfillment={initialFulfillment}
+            initialQuantity={initialQuantity}
           />
         </div>
       </section>

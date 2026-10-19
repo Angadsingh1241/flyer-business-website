@@ -338,7 +338,7 @@ export const siteContent = {
         priceFrom: 500,
         summary: "2,500 homes × $0.20 per home.",
         audience: "For businesses supplying printed flyers.",
-        includes: ["Delivery route planning", "Door-to-door distribution", "Your printed flyers"],
+        includes: ["Delivery route planning", "Door-to-door distribution", "Customer-supplied printed flyers"],
         ctaLabel: "Get This Quote",
       },
       {
@@ -360,7 +360,7 @@ export const siteContent = {
         priceFrom: 875,
         summary: "2,500 homes × $0.35 per home.",
         audience: "For businesses supplying printed door hangers.",
-        includes: ["Delivery route planning", "Door hanger distribution", "Your printed hangers"],
+        includes: ["Delivery route planning", "Door hanger distribution", "Customer-supplied printed hangers"],
         ctaLabel: "Get This Quote",
       },
     ] satisfies PricingPackage[],

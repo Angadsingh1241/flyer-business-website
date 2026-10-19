@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MapPinned, MessageCircleMore, PhoneCall, Printer, SendToBack } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, MapPinned, MessageCircleMore, PhoneCall, Printer, SendToBack } from "lucide-react";
 
 import { HeroVisual } from "@/components/site/hero-visual";
 import { PortfolioGrid } from "@/components/site/portfolio-grid";
@@ -7,12 +7,11 @@ import { PricingCard } from "@/components/site/pricing-card";
 import { QuoteForm } from "@/components/site/quote-form";
 import { Reveal } from "@/components/site/reveal";
 import { SectionHeading } from "@/components/site/section-heading";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { createPageMetadata } from "@/lib/metadata";
 import { siteContent } from "@/lib/site-content";
-import { formatCurrency, formatHomeCount } from "@/lib/utils";
+import { formatHomeCount } from "@/lib/utils";
 
 const serviceIcons = [SendToBack, MapPinned, Printer, MessageCircleMore];
 
@@ -27,87 +26,105 @@ export default function HomePage() {
 
   return (
     <>
-      <section className="section-shell overflow-hidden">
-        <div className="container-shell">
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-center">
-            <Reveal className="space-y-8">
-              <Badge variant="brand">{siteContent.home.hero.eyebrow}</Badge>
+      <section className="relative isolate overflow-hidden bg-[#091e39] text-white">
+        <div aria-hidden="true" className="pointer-events-none absolute -left-24 -top-40 h-[480px] w-[480px] rounded-full bg-[#1f508a]/40 blur-[100px]" />
+        <div aria-hidden="true" className="pointer-events-none absolute -bottom-72 right-0 h-[500px] w-[500px] rounded-full bg-[#f4a43a]/10 blur-[100px]" />
+        <div className="container-shell relative py-16 md:py-20 lg:py-24">
+          <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1.03fr)_minmax(0,0.97fr)] lg:gap-10">
+            <Reveal className="relative z-10 space-y-7">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#f7c37e]">
+                <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[#f4a43a]" />
+                {siteContent.home.hero.eyebrow}
+              </span>
               <div className="space-y-5">
-                <h1 className="max-w-3xl text-5xl font-semibold tracking-[-0.06em] text-balance text-foreground md:text-7xl">
+                <h1 className="max-w-3xl text-5xl font-semibold leading-[1.04] tracking-[-0.065em] text-white sm:text-6xl xl:text-[4.6rem]">
                   {siteContent.home.hero.headline}
                 </h1>
-                <p className="max-w-2xl text-lg md:text-xl">
+                <p className="max-w-xl text-lg leading-8 text-white/75 md:text-xl">
                   {siteContent.home.hero.description}
                 </p>
               </div>
-
               <div className="flex flex-wrap gap-3">
-                <Button asChild variant="brand" size="lg">
-                  <Link href="/contact">{siteContent.home.hero.primaryCta}</Link>
+                <Button asChild size="lg" className="bg-[#f4a43a] text-[#091e39] hover:bg-[#ffbe66]">
+                  <Link href="/contact">{siteContent.home.hero.primaryCta} <ArrowRight aria-hidden="true" className="h-4 w-4" /></Link>
                 </Button>
-                <Button asChild variant="outline" size="lg">
+                <Button asChild size="lg" className="border border-white/30 bg-white/10 text-white hover:bg-white/20">
                   <Link href="/pricing">{siteContent.home.hero.secondaryCta}</Link>
                 </Button>
-                <Button asChild variant="outline" size="lg">
-                  <a href={siteContent.business.whatsappHref}>
-                    {siteContent.home.hero.tertiaryCta}
-                  </a>
-                </Button>
               </div>
-
-              <div className="grid gap-3 sm:grid-cols-3">
+              <div className="flex flex-wrap gap-x-6 gap-y-3 pt-1">
                 {siteContent.home.hero.supportingPoints.map((point) => (
-                  <div
-                    key={point}
-                    className="rounded-[1.25rem] border border-border bg-white px-4 py-4 text-sm font-medium text-foreground shadow-sm"
-                  >
+                  <span key={point} className="inline-flex items-center gap-2 text-sm text-white/85">
+                    <Check aria-hidden="true" className="h-4 w-4 text-[#f4a43a]" />
                     {point}
-                  </div>
+                  </span>
                 ))}
               </div>
-
-              <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
-                <a href={siteContent.business.phoneHref} className="inline-flex items-center gap-2">
-                  <PhoneCall className="h-4 w-4 text-brand" />
+              <div className="grid max-w-lg grid-cols-2 gap-3 border-t border-white/20 pt-6">
+                <div>
+                  <div className="text-3xl font-semibold text-white">$0.25 <span className="text-base font-normal text-white/70">/ home</span></div>
+                  <p className="mt-1 text-sm leading-6 text-white/70">Standard flyers — design, print & delivery</p>
+                </div>
+                <div className="border-l border-white/20 pl-5">
+                  <div className="text-3xl font-semibold text-white">$0.20 <span className="text-base font-normal text-white/70">/ home</span></div>
+                  <p className="mt-1 text-sm leading-6 text-white/70">Standard flyer delivery only</p>
+                </div>
+              </div>
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/70">
+                <a href={siteContent.business.phoneHref} className="inline-flex items-center gap-2 hover:text-white">
+                  <PhoneCall aria-hidden="true" className="h-4 w-4 text-[#f4a43a]" />
                   {siteContent.business.phoneDisplay}
                 </a>
-                <span className="text-border">&bull;</span>
-                <a href={siteContent.business.whatsappHref} className="inline-flex items-center gap-2">
-                  <MessageCircleMore className="h-4 w-4 text-brand" />
-                  Quick quote on WhatsApp
+                <a href={siteContent.business.whatsappHref} className="inline-flex items-center gap-2 hover:text-white">
+                  <MessageCircleMore aria-hidden="true" className="h-4 w-4 text-[#f4a43a]" />
+                  Chat on WhatsApp
                 </a>
               </div>
             </Reveal>
-
-            <Reveal delay={0.1}>
-              <HeroVisual />
-            </Reveal>
+            <Reveal delay={0.1}><HeroVisual /></Reveal>
           </div>
         </div>
       </section>
 
-      <section className="section-shell">
-        <div className="container-shell space-y-12">
-          <SectionHeading
-            eyebrow={siteContent.home.servicesIntro.eyebrow}
-            title={siteContent.home.servicesIntro.title}
-            description={siteContent.home.servicesIntro.description}
-          />
+      <section className="border-b border-border bg-white">
+        <div className="container-shell grid gap-3 py-6 text-center sm:grid-cols-3 sm:text-left">
+          {[
+            { title: "Target the right streets", detail: "Choose areas or postal codes" },
+            { title: "Print-ready or done for you", detail: "Complete and delivery-only options" },
+            { title: "One local point of contact", detail: "Clear quotes and campaign planning" },
+          ].map((item) => (
+            <div key={item.title} className="border-b border-border/60 pb-3 last:border-0 sm:border-b-0 sm:border-r sm:px-4 sm:pb-0 sm:first:pl-0">
+              <div className="text-sm font-semibold text-foreground">{item.title}</div>
+              <p className="mt-1 text-sm leading-6">{item.detail}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-          <div className="grid gap-6 lg:grid-cols-4">
+      <section className="section-shell">
+        <div className="container-shell space-y-9">
+          <div className="flex flex-wrap items-end justify-between gap-5">
+            <SectionHeading
+              eyebrow={siteContent.home.servicesIntro.eyebrow}
+              title="Everything your local campaign needs."
+              description="Go from an idea to letterboxes and doorsteps with the services that fit your campaign."
+            />
+            <Button asChild variant="outline"><Link href="/services">Explore all services <ArrowUpRight aria-hidden="true" className="h-4 w-4" /></Link></Button>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {siteContent.services.map((service, index) => {
               const Icon = serviceIcons[index] ?? SendToBack;
-
               return (
-                <Reveal key={service.slug} delay={index * 0.05}>
-                  <Card className="h-full border-white/80 bg-white/92 p-6">
+                <Reveal key={service.slug} delay={index * 0.04}>
+                  <Card className="group h-full border-border bg-white p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(13,42,82,0.10)]">
                     <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand/10 text-brand">
-                      <Icon className="h-5 w-5" />
+                      <Icon aria-hidden="true" className="h-5 w-5" />
                     </div>
-                    <h2 className="mt-5 text-2xl font-semibold text-foreground">
-                      {service.title}
-                    </h2>
-                    <p className="mt-3">{service.summary}</p>
+                    <h2 className="mt-6 text-xl font-semibold text-foreground">{service.title}</h2>
+                    <p className="mt-3 text-sm leading-7">{service.summary}</p>
+                    <Link href="/services" className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-brand hover:underline">
+                      Learn more <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+                    </Link>
                   </Card>
                 </Reveal>
               );
@@ -116,175 +133,103 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section-shell bg-white/60">
-        <div className="container-shell space-y-12">
-          <SectionHeading
-            eyebrow={siteContent.home.pricingIntro.eyebrow}
-            title={siteContent.home.pricingIntro.title}
-            description={siteContent.home.pricingIntro.description}
-          />
-
-          <div className="grid gap-6 lg:grid-cols-2">
-            {siteContent.pricing.plans.map((plan, index) => (
-              <Reveal key={plan.slug} delay={index * 0.05}>
-                <PricingCard plan={plan} />
-              </Reveal>
-            ))}
-          </div>
-
-          <div className="grid gap-6 lg:grid-cols-4">
-            {siteContent.pricing.packages.map((pkg, index) => (
-              <Reveal key={pkg.slug} delay={index * 0.05}>
-                <Card className="h-full border-white/80 bg-white/92 p-6">
-                  <div className="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                    Example package
-                  </div>
-                  <h3 className="mt-3 text-2xl font-semibold text-foreground">{pkg.title}</h3>
-                  <div className="mt-4 text-4xl font-semibold text-foreground">
-                    {formatCurrency(pkg.priceFrom)}
-                  </div>
-                  <p className="mt-3">{pkg.summary}</p>
-                  <p className="mt-3 text-sm">{pkg.audience}</p>
-                  <ul className="mt-5 grid gap-2 text-sm text-muted-foreground">
-                    {pkg.includes.map((item) => (
-                      <li key={item} className="flex gap-2">
-                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-brand" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button asChild variant="outline" className="mt-6 w-full">
-                    <Link href="/contact">{pkg.ctaLabel}</Link>
-                  </Button>
-                </Card>
-              </Reveal>
-            ))}
-          </div>
-
-          <p className="text-sm text-muted-foreground">{siteContent.pricing.disclaimer}</p>
-        </div>
-      </section>
-
-      <section className="section-shell">
-        <div className="container-shell space-y-12">
-          <SectionHeading
-            eyebrow={siteContent.home.areasIntro.eyebrow}
-            title={siteContent.home.areasIntro.title}
-            description={siteContent.home.areasIntro.description}
-          />
-
-          <div className="grid gap-6 lg:grid-cols-3">
-            {[
-              {
-                title: "By city or area",
-                description:
-                  "Start with Hamilton, Ancaster, Dundas, Waterdown, Stoney Creek, or a major area like Hamilton Mountain.",
-              },
-              {
-                title: "By postal code",
-                description:
-                  "Use postal prefixes like L8N, L9G, L8B, or L9H when you want tighter geographic targeting.",
-              },
-              {
-                title: "Advanced targeting",
-                description:
-                  "Open advanced targeting only if you want to combine multiple neighbourhoods or narrow the route further.",
-              },
-            ].map((item) => (
-              <Card key={item.title} className="border-white/80 bg-white/92 p-6">
-                <h3 className="text-2xl font-semibold text-foreground">{item.title}</h3>
-                <p className="mt-3">{item.description}</p>
-              </Card>
-            ))}
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {featuredAreas.map((area) => (
-              <Card key={area.slug} className="border-white/80 bg-white/92 p-6">
-                <div className="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                  {formatHomeCount(area.homes)} homes
-                </div>
-                <h3 className="mt-3 text-2xl font-semibold text-foreground">{area.name}</h3>
-                <p className="mt-3">{area.notes}</p>
-                <p className="mt-4 text-sm">Postal codes: {area.postalPrefixes.join(", ")}</p>
-              </Card>
-            ))}
-          </div>
-
-          <Button asChild variant="outline">
-            <Link href="/areas-served">View all areas and map</Link>
-          </Button>
-        </div>
-      </section>
-
-      <section className="section-shell bg-white/60">
-        <div className="container-shell space-y-12">
-          <SectionHeading
-            eyebrow={siteContent.home.samplesIntro.eyebrow}
-            title={siteContent.home.samplesIntro.title}
-            description={siteContent.home.samplesIntro.description}
-          />
-          <PortfolioGrid items={siteContent.portfolio.items} />
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-muted-foreground">{siteContent.portfolio.note}</p>
-            <Button asChild variant="outline">
-              <Link href="/templates">View all templates</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-shell">
-        <div className="container-shell space-y-12">
-          <SectionHeading
-            eyebrow={siteContent.home.howItWorksIntro.eyebrow}
-            title={siteContent.home.howItWorksIntro.title}
-            description={siteContent.home.howItWorksIntro.description}
-          />
-
-          <div className="grid gap-6 lg:grid-cols-4">
-            {siteContent.howItWorks.steps.map((step, index) => (
-              <Reveal key={step.number} delay={index * 0.05}>
-                <Card className="h-full border-white/80 bg-white/92 p-6">
-                  <div className="text-sm font-semibold uppercase tracking-[0.18em] text-brand">
-                    Step {step.number}
-                  </div>
-                  <h3 className="mt-4 text-2xl font-semibold text-foreground">{step.title}</h3>
-                  <p className="mt-3">{step.description}</p>
-                </Card>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-shell">
-        <div className="container-shell grid gap-8 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:items-start">
-          <div className="space-y-6">
+      <section className="section-shell bg-white">
+        <div className="container-shell space-y-9">
+          <div className="flex flex-wrap items-end justify-between gap-5">
             <SectionHeading
-              eyebrow="Get a quote"
-              title={siteContent.home.finalCta.title}
-              description={siteContent.home.finalCta.description}
+              eyebrow={siteContent.home.pricingIntro.eyebrow}
+              title={siteContent.home.pricingIntro.title}
+              description={siteContent.home.pricingIntro.description}
             />
-            <div className="grid gap-4">
-              {[
-                "Local Hamilton service",
-                "Flyer delivery and door hangers",
-                "Sample designs shown honestly while real assets are being added",
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="rounded-[1.25rem] border border-border bg-white px-4 py-4 text-sm font-medium text-foreground shadow-sm"
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
+            <Button asChild variant="outline"><Link href="/pricing">Calculate your price <ArrowUpRight aria-hidden="true" className="h-4 w-4" /></Link></Button>
           </div>
+          <div className="grid gap-6 lg:grid-cols-2">
+            {siteContent.pricing.plans.map((plan) => <PricingCard key={plan.slug} plan={plan} />)}
+          </div>
+          <p className="text-sm">{siteContent.pricing.disclaimer}</p>
+        </div>
+      </section>
 
+      <section className="section-shell">
+        <div className="container-shell space-y-8">
+          <div className="flex flex-wrap items-end justify-between gap-5">
+            <SectionHeading
+              eyebrow="Local coverage"
+              title="Reach the homes that matter to your business."
+              description="Plan your campaign by neighbourhood or postal code. We can help you decide where to focus."
+            />
+            <Button asChild variant="outline"><Link href="/areas-served">Explore delivery areas <MapPinned aria-hidden="true" className="h-4 w-4" /></Link></Button>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {featuredAreas.map((area) => (
+              <Link
+                key={area.slug}
+                href={`/contact?areas=${area.slug}`}
+                className="group rounded-[1.4rem] border border-border bg-white px-5 py-5 transition hover:border-brand/40 hover:shadow-soft"
+              >
+                <span className="block text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">{formatHomeCount(area.homes)} estimated homes</span>
+                <span className="mt-3 flex items-center justify-between gap-3 text-xl font-semibold text-foreground">
+                  {area.name} <ArrowUpRight aria-hidden="true" className="h-4 w-4 text-brand" />
+                </span>
+                <span className="mt-2 block text-sm text-muted-foreground">{area.postalPrefixes.join(", ")}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell bg-white">
+        <div className="container-shell space-y-9">
+          <div className="flex flex-wrap items-end justify-between gap-5">
+            <SectionHeading
+              eyebrow="Flyer design inspiration"
+              title="Make a lasting impression at the door."
+              description="Browse sample flyer layouts and explore visual directions for your own campaign."
+            />
+            <Button asChild variant="outline"><Link href="/templates">View all flyer designs <ArrowUpRight aria-hidden="true" className="h-4 w-4" /></Link></Button>
+          </div>
+          <PortfolioGrid items={siteContent.portfolio.items.slice(0, 3)} />
+          <p className="text-sm">{siteContent.portfolio.note}</p>
+        </div>
+      </section>
+
+      <section className="section-shell">
+        <div className="container-shell space-y-9">
+          <SectionHeading
+            eyebrow="How it works"
+            title="From your idea to local doorsteps."
+            description="A clear process, whether you need the complete package or delivery of ready-printed flyers."
+          />
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {siteContent.howItWorks.steps.map((step) => (
+              <Card key={step.number} className="h-full border-border bg-white p-6">
+                <div className="text-xs font-semibold uppercase tracking-[0.16em] text-[#a36a15]">Step {step.number}</div>
+                <h3 className="mt-3 text-xl font-semibold text-foreground">{step.title}</h3>
+                <p className="mt-3 text-sm">{step.description}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell bg-[#eaf0f7]">
+        <div className="container-shell grid items-start gap-8 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-14">
+          <div className="space-y-5 lg:sticky lg:top-32">
+            <SectionHeading
+              eyebrow="Let's get started"
+              title="Tell us where you'd like to be seen."
+              description="Share your area, format, and approximate quantity. We'll help you plan the next step."
+            />
+            <div className="space-y-3 border-t border-border pt-5">
+              <div className="flex items-center gap-3 text-sm font-medium text-foreground"><Check className="h-4 w-4 text-success" /> Design, print & delivery available</div>
+              <div className="flex items-center gap-3 text-sm font-medium text-foreground"><Check className="h-4 w-4 text-success" /> Delivery-only packages available</div>
+              <div className="flex items-center gap-3 text-sm font-medium text-foreground"><Check className="h-4 w-4 text-success" /> Choose areas that fit your business</div>
+            </div>
+            <p className="text-sm">Prefer a quick chat? <a href={siteContent.business.whatsappHref} className="font-semibold text-brand underline">Message us on WhatsApp.</a></p>
+          </div>
           <QuoteForm
-            title="Fast quote request"
-            description="Send the basics now. Optional details are there if you want to include them."
+            title="Request a campaign quote"
+            description="Tell us about your campaign. Your request will open in WhatsApp ready to send."
             submitLabel="Send on WhatsApp"
             source="homepage-form"
             variant="home"

@@ -1,45 +1,26 @@
 import { siteContent } from "@/lib/site-content";
 
+export type FulfillmentType = "complete" | "delivery-only";
+
 type EstimateInput = {
   deliveryType: string;
   homeCount: number;
-  includeDesign: boolean;
-  includePrinting: boolean;
+  fulfillment: FulfillmentType;
 };
 
-function getRate(deliveryType: string) {
-  if (deliveryType === "custom-targeted") {
-    return siteContent.pricing.addOns.customTargetedStartingAt;
-  }
-
-  return (
-    siteContent.pricing.plans.find((plan) => plan.deliveryType === deliveryType)
-      ?.startingAt ?? siteContent.pricing.plans[0].startingAt
-  );
-}
-
-export function estimateCampaign({
-  deliveryType,
-  homeCount,
-  includeDesign,
-  includePrinting,
-}: EstimateInput) {
-  const safeHomeCount = Number.isFinite(homeCount) ? Math.max(homeCount, 0) : 0;
-  const deliveryCost = safeHomeCount * getRate(deliveryType);
-  const designCost = includeDesign
-    ? siteContent.pricing.addOns.designStartingAt
-    : 0;
-  const printingCost = includePrinting
-    ? Math.max(
-        siteContent.pricing.addOns.printMinimum,
-        safeHomeCount * siteContent.pricing.addOns.printPerHomeEstimate,
-      )
+export function estimateCampaign({ deliveryType, homeCount, fulfillment }: EstimateInput) {
+  const plan = siteContent.pricing.plans.find((item) => item.deliveryType === deliveryType);
+  const rate = fulfillment === "delivery-only"
+    ? (plan?.deliveryOnlyAt ?? 0)
+    : (plan?.startingAt ?? 0);
+  const safeHomeCount = Number.isFinite(homeCount)
+    ? Math.max(0, Math.floor(homeCount))
     : 0;
 
   return {
-    deliveryCost,
-    designCost,
-    printingCost,
-    total: deliveryCost + designCost + printingCost,
+    rate,
+    homeCount: safeHomeCount,
+    total: Math.round(safeHomeCount * rate * 100) / 100,
+    fulfillment,
   };
 }

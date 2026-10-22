@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import "@fontsource/manrope/400.css";
 import "@fontsource/manrope/500.css";
 import "@fontsource/manrope/600.css";
@@ -33,6 +34,7 @@ export default function RootLayout({
         <SiteFooter />
         <StickyMobileCta />
         <WhatsAppFloat />
+        <Analytics />
         <script
           id="global-schema"
           type="application/ld+json"
